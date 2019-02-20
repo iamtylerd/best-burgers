@@ -7,23 +7,22 @@ const firebaseConfig = require('./firebase.config.json');
 firebase.initializeApp(firebaseConfig);
 
 export default class App extends React.Component {
-  constructor(props) {
-    super(props)
-    state = {
-      isLoadingComplete: false,
-    };
-  }
+	state = {
+		burgers: [],
+		isLoadingComplete: false,
+		user: {}
+	};
 
-  async componentDidMount() {
-    // TODO: You: Do firebase things
-    await firebase.auth().signInAnonymously()
-    .then((user) => {
-      this.mountBurgers(user)
-      this.setState({
-        user: user.user,
-      })
-    });
-  }
+	async componentDidMount() {
+		// TODO: You: Do firebase things
+		await firebase.auth().signInAnonymously()
+		.then((user) => {
+			this.mountBurgers(user)
+			this.setState({
+				user: user.user,
+			})
+		});
+	}
 
   mountBurgers(user) {
     const uid = user.user.uid;
@@ -32,8 +31,8 @@ export default class App extends React.Component {
         let b = []
         for(k in snapshot.val()) {
           b.push(snapshot.val()[k])
-        }
-        this.setState(prevState => ({ 
+		}
+        this.setState(prevState => ({
           burgers: [ ...prevState.burgers, b ]
         })
         );
@@ -56,7 +55,7 @@ export default class App extends React.Component {
       return (
         <View style={styles.container}>
           {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-          <AppNavigator user={user} burgers={burgers}/>
+          <AppNavigator screenProps={{ burgers, user}}/>
         </View>
       );
     }
