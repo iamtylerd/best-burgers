@@ -25,8 +25,8 @@ export default class AddBurger extends React.Component {
 
   async saveBurger() {
     const { user: { uid } } = this.props.screenProps;
-    console.log(this.props.screenProps);
     const { name, rating } = this.state;
+
     firebase.database().ref(`burgers/${uid}`).update({
      [name] : {
         name,
