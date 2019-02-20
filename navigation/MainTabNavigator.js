@@ -7,7 +7,7 @@ import HomeScreen from '../screens/HomeScreen';
 import AddBurger from '../screens/AddBurger';
 
 const HomeStack = createStackNavigator({
-  Home: <HomeScreen user={this.props.user} burgers={this.props.burgers}/>,
+  Home: HomeScreen,
 });
 
 HomeStack.navigationOptions = {

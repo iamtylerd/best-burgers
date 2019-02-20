@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, ScrollView } from 'react-native';
 import { Input, Button } from 'react-native-elements';
+import * as firebase from 'firebase';
 
 export default class AddBurger extends React.Component {
   constructor(props) {
@@ -23,8 +24,9 @@ export default class AddBurger extends React.Component {
   }
 
   async saveBurger() {
-    const { user, name, rating } = this.state;
-    console.log(user)
+    const { user: { uid } } = this.props.screenProps;
+    const { name, rating } = this.state;
+
     firebase.database().ref(`burgers/${uid}`).update({
      [name] : {
         name,
