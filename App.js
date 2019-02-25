@@ -51,7 +51,6 @@ export default class App extends React.Component {
       );
     } else {
       const { user, burgers } = this.state;
-      console.log(this.state)
       return (
         <View style={styles.container}>
           {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
